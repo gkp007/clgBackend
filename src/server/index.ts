@@ -15,8 +15,8 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://melodic-sorbet-848db5.netlify.app",
   "https://imaginative-churros-52124b.netlify.app",
+  "https://6809dd3da260d527745bdb61--imaginative-churros-52124b.netlify.app",
 ];
 
 interface CorsOptions {
@@ -24,7 +24,6 @@ interface CorsOptions {
     origin: string | undefined,
     callback: (err: Error | null, allow?: boolean) => void
   ) => void;
-  methods: string[];
   credentials: boolean;
 }
 
@@ -40,7 +39,6 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
-    methods: ["GET", "POST"],
     credentials: true,
   } as CorsOptions)
 );
