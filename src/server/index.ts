@@ -12,16 +12,37 @@ import type { Request, Response, NextFunction } from "express";
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "https://melodic-sorbet-848db5.netlify.app",
+  "https://imaginative-churros-52124b.netlify.app",
+];
+
+interface CorsOptions {
+  origin: (
+    origin: string | undefined,
+    callback: (err: Error | null, allow?: boolean) => void
+  ) => void;
+  methods: string[];
+  credentials: boolean;
+}
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:3000",
-      "https://melodic-sorbet-848db5.netlify.app",
-    ],
+    origin: function (
+      origin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void
+    ): void {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST"],
     credentials: true,
-  })
+  } as CorsOptions)
 );
 
 // Add error handling middleware
