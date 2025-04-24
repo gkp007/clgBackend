@@ -10,7 +10,6 @@ const { ContactUsForm } = require("./models/ContactUsForm");
 import type { Request, Response, NextFunction } from "express";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(
@@ -129,10 +128,7 @@ app.get("/health", (_req: Request, res: Response) => {
 });
 
 // Start server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`API available at http://localhost:${PORT}`);
-  console.log(
-    `Try accessing http://localhost:${PORT}/health to check server status`
-  );
 });
