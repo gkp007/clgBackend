@@ -14,13 +14,15 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://melodic-sorbet-848db5.netlify.app",
+    ],
     methods: ["GET", "POST"],
-    credentials: false,
+    credentials: true,
   })
 );
-
-app.use(express.json());
 
 // Add error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
