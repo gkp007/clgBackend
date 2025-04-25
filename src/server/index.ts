@@ -17,39 +17,17 @@ const allowedOrigins = [
   "http://localhost:3000",
   "https://imaginative-churros-52124b.netlify.app",
   "https://6809dd3da260d527745bdb61--imaginative-churros-52124b.netlify.app",
+  "https://secondscholarship.com",
+  "https://www.secondscholarship.com",
 ];
 
-interface CorsOptions {
-  origin: (
-    origin: string | undefined,
-    callback: (err: Error | null, allow?: boolean) => void
-  ) => void;
-  credentials: boolean;
-}
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true,
+};
 
-app.use(
-  cors({
-    origin: function (
-      origin: string | undefined,
-      callback: (err: Error | null, allow?: boolean) => void
-    ): void {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  } as CorsOptions)
-);
-
-// Add error handling middleware
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error("Error:", err);
-  res
-    .status(500)
-    .json({ message: "Internal server error", error: err.message });
-});
+app.use(cors(corsOptions));
+app.use(express.json());
 
 // MongoDB Connection
 const MONGODB_URI =
@@ -152,4 +130,11 @@ app.get("/health", (_req: Request, res: Response) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
+});
+
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error("Error:", err);
+  res
+    .status(500)
+    .json({ message: "Internal server error", error: err.message });
 });
