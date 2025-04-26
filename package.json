@@ -4,8 +4,8 @@
   "description": "Backend API for college application",
   "main": "app.js",
   "scripts": {
-    "build": "vite build",
     "start": "node app.js",
+    "build": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
