@@ -6,14 +6,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
- "start": "node --max-old-space-size=512 node_modules/.bin/ts-node -P src/server/tsconfig.server.json src/server/index.ts",
-
-    "seed": "ts-node -P tsconfig.server.json src/server/collegeData.ts"
+    "start": "npx ts-node -P src/server/tsconfig.server.json src/server/index.ts"
   },
   "dependencies": {
-    "ts-node": "^10.9.1",
-    "@lottiefiles/react-lottie-player": "^3.6.0",
-    "@shadcn/ui": "^0.0.4",
     "@types/yup": "^0.32.0",
     "axios": "^1.8.4",
     "body-parser": "^2.2.0",
@@ -21,21 +16,13 @@
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "formik": "^2.4.6",
-    "framer-motion": "^12.7.4",
-    "lottie-react": "^2.4.1",
-    "lucide-react": "^0.487.0",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
     "next": "^15.3.0",
-    "otpless-react": "^0.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
-    "react-router-dom": "^7.5.0",
-    "react-tooltip": "^5.28.1",
-    "yup": "^1.6.1"
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -45,12 +32,7 @@
     "@types/node": "^22.14.1",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
-    "@vitejs/plugin-react": "^2.0.0",
-    "autoprefixer": "^10.4.7",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.6",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3",
-    "vite": "^3.0.0"
+    "typescript": "^5.8.3"
   }
 }
