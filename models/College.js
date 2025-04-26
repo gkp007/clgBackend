@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const collegeSchema = new mongoose.Schema({
   name: String,
@@ -16,4 +16,6 @@ const collegeSchema = new mongoose.Schema({
   website: String,
 });
 
-export const College = mongoose.model("College", collegeSchema);
+const College = mongoose.model("College", collegeSchema);
+
+module.exports = { College }; 

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const interestFormSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -9,6 +9,6 @@ const interestFormSchema = new mongoose.Schema({
   email: { type: String, required: true },
 });
 
-export const InterestForm =
-  mongoose.models.InterestForm ||
-  mongoose.model("InterestForm", interestFormSchema);
+const InterestForm = mongoose.models.InterestForm || mongoose.model("InterestForm", interestFormSchema);
+
+module.exports = { InterestForm }; 

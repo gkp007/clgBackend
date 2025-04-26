@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const submissionSchema = new mongoose.Schema({
   fullName: String,
@@ -8,7 +8,6 @@ const submissionSchema = new mongoose.Schema({
   annualIncome: String,
   counsellor_no: String,
   How_did_you_hear_about_us: String,
-
   tenthPercentage: String,
   twelfthPercentage: String,
   graduation: String,
@@ -16,4 +15,6 @@ const submissionSchema = new mongoose.Schema({
   interestedStream: String,
 });
 
-export const Submission = mongoose.model("Submission", submissionSchema);
+const Submission = mongoose.model("Submission", submissionSchema);
+
+module.exports = { Submission }; 
