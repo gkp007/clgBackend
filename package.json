@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "npx ts-node -P tsconfig.server.json index.ts"
+    "start": "npx ts-node -P tsconfig.server.json app.ts"
   },
   "dependencies": {
     "@types/yup": "^0.32.0",

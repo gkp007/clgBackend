@@ -17,6 +17,6 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
   },
-  "include": ["src", "index.ts"],
+  "include": ["src", "app.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
