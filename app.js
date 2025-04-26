@@ -2,14 +2,30 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const helmet = require("helmet");
+const compression = require("compression");
 const { College } = require("./models/College");
 const { Submission } = require("./models/Submission");
 const { InterestForm } = require("./models/InterestForm");
 const { ContactUsForm } = require("./models/ContactUsForm");
+const { generateSitemap } = require("./utils/sitemap");
 
 const app = express();
 
-// Middleware
+// SEO and Security Middleware
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+    },
+  },
+}));
+app.use(compression());
+
+// CORS Middleware
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
@@ -46,6 +62,25 @@ mongoose
     console.error("MongoDB connection error:", err);
     console.error("Please make sure MongoDB is running and the connection string is correct");
   });
+
+// SEO Routes
+app.get("/sitemap.xml", async (req, res) => {
+  try {
+    const sitemap = await generateSitemap(process.env.BASE_URL || "https://secondscholarship.com");
+    res.header('Content-Type', 'application/xml');
+    res.send(sitemap);
+  } catch (error) {
+    console.error("Error generating sitemap:", error);
+    res.status(500).send("Error generating sitemap");
+  }
+});
+
+app.get("/robots.txt", (req, res) => {
+  res.type('text/plain');
+  res.send(`User-agent: *
+Allow: /
+Sitemap: ${process.env.BASE_URL || "https://secondscholarship.com"}/sitemap.xml`);
+});
 
 // API Routes
 app.get("/api/colleges", async (req, res) => {
