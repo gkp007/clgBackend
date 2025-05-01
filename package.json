@@ -2,9 +2,9 @@
   "name": "college-backend",
   "version": "1.0.0",
   "description": "Backend API for college application",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server",
     "build": "npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,7 +16,7 @@
     "express": "^5.1.0",
     "helmet": "^7.1.0",
     "mongoose": "^8.13.2",
-    "sitemap": "^7.1.1"
+    "sitemap": "^7.1.2"
   },
   "engines": {
     "node": ">=18.0.0"
