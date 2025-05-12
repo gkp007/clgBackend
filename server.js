@@ -11,6 +11,7 @@ const { ContactUsForm } = require("./models/ContactUsForm");
 const { Blog } = require("./models/Blog");
 const { Comment } = require("./models/Comment");
 const { generateSitemap } = require("./utils/sitemap");
+const { FeeCalculatorSubmission } = require("./models/FeeCalculatorSubmission");
 
 const app = express();
 
@@ -301,6 +302,23 @@ app.post("/api/contactUs", async (req, res) => {
     console.error("Error while submitting:", error);
     res.status(400).json({
       message: "Error while submitting",
+      error: error.message || "Unknown error",
+    });
+  }
+});
+
+app.post("/api/fee-calculator-submission", async (req, res) => {
+  try {
+    const submission = new FeeCalculatorSubmission(req.body);
+    await submission.save();
+    res.status(201).json({
+      message: "Fee calculator submission saved successfully",
+      submission
+    });
+  } catch (error) {
+    console.error("Error saving fee calculator submission:", error);
+    res.status(400).json({
+      message: "Error saving fee calculator submission",
       error: error.message || "Unknown error",
     });
   }
